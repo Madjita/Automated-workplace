@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import TableAutomatedWorkstation, TableDevice, TableDeviceSerial
+
 
 # Create your views here.
 def index(request):
-    return render(request, 'home/index.html', None)
+    automatedWorkstation = TableAutomatedWorkstation.objects.all();
+
+    return render(request, 'home/index.html', {'automatedWorkstation': automatedWorkstation})

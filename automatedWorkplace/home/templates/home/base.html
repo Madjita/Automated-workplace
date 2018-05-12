@@ -1,0 +1,14 @@
+
+{% block automatedWorkstation %}
+
+{% for automatedWorkstations in automatedWorkstation %}
+
+  {% if automatedWorkstations.name != 'NULL' %}
+  <div>
+       <h1><a href="">{{ automatedWorkstations.name|linebreaksbr }}</a></h1>
+       <p>{{ automatedWorkstations.about|linebreaksbr }}</p>
+   </div>
+  {% endif %}
+{% endfor %}
+
+{% endblock %}
