@@ -43,7 +43,7 @@
 
     {% include "home/header.html" %}
 
-    {% include "home/base.html" %}
+
 
         <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -53,16 +53,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li class="active">Dashboard</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
+            
         </div>
+
+            {% include "home/base.html" %}
+
 
         <div class="content mt-3">
 
@@ -437,7 +432,7 @@
                         <h4>World</h4>
                     </div>
                     <div class="Vector-map-js">
-                        <div id="vmap" class="vmap" style="height: 265px;"></div>
+                        <div style="height: 265px;"></div>
                     </div>
                 </div>
                 <!-- /# card -->

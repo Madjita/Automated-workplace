@@ -4,10 +4,35 @@
 {% for automatedWorkstations in automatedWorkstation %}
 
   {% if automatedWorkstations.name != 'NULL' %}
-  <div>
-       <h1><a href="">{{ automatedWorkstations.name|linebreaksbr }}</a></h1>
-       <p>{{ automatedWorkstations.about|linebreaksbr }}</p>
-   </div>
+
+  <div class="col-lg-3">
+      <div class="card" >
+          <div class="card-header user-header alt bg-dark">
+              <strong class="card-title text-light">{{ automatedWorkstations.name|linebreaksbr }}</strong>
+          </div>
+          <ul class="list-group list-group-flush">
+
+
+                                    <li class="list-group-item">
+                                        <a href="#"> <i class="fa fa-inbox"></i> Количество устройств <span class="badge badge-success pull-right">11</span></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#"> <i class="fa fa-tasks"></i> Проверок <span class="badge badge-danger pull-right">15</span></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#"> <i class="fa fa-comments-o"></i> Message <span class="badge badge-warning pull-right r-activity">03</span></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#">
+                                          <i class="fa fa-info-circle"></i> {{ automatedWorkstations.about|linebreaksbr }}
+
+                                        </a>
+                                    </li>
+                                </ul>
+      </div>
+      <!-- /# card -->
+  </div>
+
   {% endif %}
 {% endfor %}
 
