@@ -1,0 +1,14 @@
+<h3 class="menu-title">Поиск устройств в сети</h3><!-- /.menu-title -->
+<li class="menu-item-has-children dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       <i class="menu-icon fa fa-inbox"></i>Поиск   </a>
+    <ul class="sub-menu children dropdown-menu">
+
+      {% for list in listDevice.listDevice %}
+
+        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">{{ list }}</a></li>
+
+
+        {% endfor %}
+    </ul>
+</li>

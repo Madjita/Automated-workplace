@@ -1,0 +1,80 @@
+
+   
+            StringBuilder buff = new StringBuilder(1000);
+
+            StringBuilder logBuf = new StringBuilder(1000);
+
+            ViStatus status;
+            ViSession rm, rsrc, rmDeviceOut;
+
+            // Visa v = new Visa();
+
+
+
+          //  try
+          //  {
+           status = Visa.GetDefaultRM(out rm);
+          
+
+
+
+            UInt32 lol;
+
+
+            List<string> listDevice = new List<string>();
+
+
+            var dsf = Visa.FindRsrc(rm, "TCPIP?*", out rsrc, out lol, buff);
+
+
+            for (int i = 0; i < lol; i++)
+            {
+                listDevice.Add(buff.ToString());
+                var asd = Visa.FindNext(rsrc, buff);
+
+                ViewData["listDevice"] += listDevice[i] + " ";
+            }
+
+
+            for (int i=0; i < listDevice.Count;i++)
+            {
+
+
+                string soket =  listDevice[i].Split(':').Last<string>();
+
+                if(soket == "SOCKET")
+                {
+                    listDevice[i] += "::GEN";
+                }
+
+
+                if (soket == "INSTR")
+                {
+                    listDevice[i] = "TCPIP0::10.12.1.84::inst0::INSTR";
+                }
+
+                // Open conection through MICS class
+                status = Visa.Open(rm, listDevice[i], ViAccessMode.VI_NO_LOCK, 0, out rmDeviceOut);
+
+                if (status != ViStatus.VI_SUCCESS)
+                {
+
+                    ViewData["listDeviceBed"] = "viDon't Open: ";
+
+                    Visa.StatusDesc(rmDeviceOut, status, buff); // Get status description
+
+
+                    ViewData["listDeviceBed"] += buff + " ";
+
+                }
+
+
+       
+
+
+                status = Visa.Printf(rmDeviceOut, "*IDN?\r\n");
+                status = Visa.Scanf(rmDeviceOut, "%T", logBuf);
+
+                ViewData["listDeviceName"] += logBuf + " \n ";
+
+                Visa.Close(rmDeviceOut);
