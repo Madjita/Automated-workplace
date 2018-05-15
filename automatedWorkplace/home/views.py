@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 visa64 = WinDLL( BASE_DIR + "/Visa/MiVISA32.dll")
 
-myDll = WinDLL( BASE_DIR + "/Visa/AutoWorkplace1.dll")
+myDll = WinDLL( BASE_DIR + "/Visa/DeployDll.dll")
 
 
 
@@ -45,10 +45,10 @@ def findDevice():
 
 
 
-    dontFind = "Устройства не найдены"
+    dontFind = None
 
     if countDevice.value == 0:
-        return JsonResponse({'ViStatus' : str(ViStatus) ,'countDevice': str(countDevice.value) ,'listDevice' : list})
+        return JsonResponse({'ViStatus' : str(ViStatus) ,'countDevice': str(countDevice.value) ,'listDevice' : dontFind})
     else:
         for countDevices in range(countDevice.value-1):
             ViStatus = visa64.viFindNext(instr_list,listDevice)
@@ -69,11 +69,27 @@ def index(request):
     automatedWorkstation = TableAutomatedWorkstation.objects.all()
 
     listDevice = findDevice();
-    json_object = json.loads(listDevice.getvalue())
+
+
+
+    listDevice = JsonResponse({'ViStatus': '0', 'countDevice': '1', 'listDevice': [['TCPIP0::10.12.1.100::8888::SOCKET', '10.12.1.66', 'Г7М-20 10008020', '10.12.1.100', '']]})
+
+
+
+    #print(str(listDevice.getvalue().decode('utf-8')))
+
+    #return listDevice
+
+    json_object = json.loads(listDevice.getvalue().decode('utf-8'))
+
+
 
     print(json_object['listDevice'])
 
-    print(myDll);
+
+    print(myDll.DeployDll())
+    print(myDll.showMessage())
+
 
     #{'ViStatus': '0', 'countDevice': '1', 'listDevice': [['TCPIP0::10.12.1.100::8888::SOCKET', '10.12.1.66', 'Г7М-20 10008020', '10.12.1.100', '']]}
 
