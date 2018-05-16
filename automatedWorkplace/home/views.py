@@ -8,7 +8,7 @@ from django.http import HttpResponse, JsonResponse
 
 import sys, os , json , codecs
 from ctypes import *
-
+from socket import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,9 +38,10 @@ def findDevice():
 
     #list.append(str(listDevice.value)[2:-1])
 
-    print('%s',listDevice)
 
-    list.append(str(listDevice.value.encode('utf16'),'cp1251').split('\t'))
+    findStr = str(listDevice.value.encode('utf16'),'cp1251').split('\t')
+    findStr[0] = findStr[0][2:-1]
+    list.append(findStr)
 
 
 
@@ -52,7 +53,11 @@ def findDevice():
         for countDevices in range(countDevice.value-1):
             ViStatus = visa64.viFindNext(instr_list,listDevice)
             #list.append(str(listDevice.value)[2:-1])
-            list.append(str(listDevice.value.encode('utf16'),'cp1251').split('\t'))
+            findStr = str(listDevice.value.encode('utf16'),'cp1251').split('\t')
+            findStr[0] = findStr[0][2:-1]
+            list.append(findStr)
+
+
 
 
     #return JsonResponse({'desc' : str(desc.value)})
@@ -68,8 +73,9 @@ def index(request):
 
     print(json_object['listDevice'])
 
-    #print(myDll.findDevice());
+    print(myDll);
 
+    #{'ViStatus': '0', 'countDevice': '1', 'listDevice': [['TCPIP0::10.12.1.100::8888::SOCKET', '10.12.1.66', 'Г7М-20 10008020', '10.12.1.100', '']]}
 
 
 

@@ -6,7 +6,14 @@
 
       {% for list in listDevice.listDevice %}
 
-        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">{{ list }}</a></li>
+        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">
+
+            {% for items in list %}
+
+            {{ items }}
+
+          {% endfor %}
+        </a></li>
 
 
         {% endfor %}
