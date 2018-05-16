@@ -9,11 +9,13 @@ from django.http import HttpResponse, JsonResponse
 import sys, os , json , codecs
 from ctypes import *
 
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 visa64 = WinDLL( BASE_DIR + "/Visa/MiVISA32.dll")
 
-#myDll = WinDLL( BASE_DIR + "/Visa/AutoWorkplace.dll")
+myDll = WinDLL( BASE_DIR + "/Visa/AutoWorkplace1.dll")
+
 
 
 def findDevice():
@@ -24,9 +26,9 @@ def findDevice():
     instr_list = c_uint32()
     countDevice = c_uint32()
 
-    list  = [];
+    list  = []
 
-    listDevice = create_string_buffer(256)
+    listDevice = create_unicode_buffer(512)
 
     ViStatus = visa64.viFindRsrc(rm_session,
                             expr,
@@ -34,18 +36,23 @@ def findDevice():
                             byref(countDevice),
                             listDevice)
 
-    list.append(str(listDevice.value)[2:-1])
+    #list.append(str(listDevice.value)[2:-1])
+
+    print('%s',listDevice)
+
+    list.append(str(listDevice.value.encode('utf16'),'cp1251').split('\t'))
+
+
 
     dontFind = "Устройства не найдены"
 
     if countDevice.value == 0:
         return JsonResponse({'ViStatus' : str(ViStatus) ,'countDevice': str(countDevice.value) ,'listDevice' : list})
-    elif countDevice.value >= 1:
-        return JsonResponse({'ViStatus' : str(ViStatus) ,'countDevice': str(countDevice.value) ,'listDevice' : list})
     else:
-        for countDevices in range(countDevice.value):
-            ViStatus = visa64.viFindNext(byref(instr_list),listDevice)
-            list.append(str(listDevice.value)[2:-1])
+        for countDevices in range(countDevice.value-1):
+            ViStatus = visa64.viFindNext(instr_list,listDevice)
+            #list.append(str(listDevice.value)[2:-1])
+            list.append(str(listDevice.value.encode('utf16'),'cp1251').split('\t'))
 
 
     #return JsonResponse({'desc' : str(desc.value)})
@@ -60,6 +67,10 @@ def index(request):
     json_object = json.loads(listDevice.getvalue())
 
     print(json_object['listDevice'])
+
+    #print(myDll.findDevice());
+
+
 
 
     return render(request, 'home/index.html', {'automatedWorkstation': automatedWorkstation, 'listDevice' : json_object })
