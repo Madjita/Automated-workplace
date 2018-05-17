@@ -1,0 +1,87 @@
+<div class="col-lg-6">
+  <div class="card">
+    <div class="card-header">
+      <strong class="card-title">Устройства</strong>
+    </div>
+
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-dark">
+                  <tr>
+                  <th scope="col">№</th>
+                  <th scope="col">Устройство</th>
+                  <th scope="col">Имя</th>
+                  <th scope="col">Ip адрес</th>
+                  <th scope="col">Серия</th>
+                  <th scope="col">Статус</th>
+                  </tr>
+            </thead>
+
+            <tbody>
+
+              {% for list in listDevice.listDevice %}
+
+
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ list.2.0 }}</td>
+                    <td>{{ list.0 }}</td>
+                    <td>{{ list.3 }}</td>
+                    <td>{{ list.2.1 }}</td>
+                    {% if list.1 == ""%}
+                        <td>
+                          Свободен
+                          <br>
+                          <button type="button" onclick="connect('{{list.0}}')">Подключить</button>
+                            <!-- <input class="btn btn-primary" type="submit" value="Подключить"/> -->
+                        </td>
+
+                    {%else %}
+                        <td>
+                          <p>Занят ({{list.1}})</p>
+                          <button type="button" onclick="dicsconnect('{{list.0}}')">Отключить</button>
+                        </td>
+                    {% endif %}
+                  </tr>
+
+              {% endfor %}
+           </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+function connect($this){
+    console.log("button clicked");
+    var connect = $this;
+    alert(connect);
+    console.log("data: " + connect);
+    $.ajax({
+        type: 'GET',
+        url: "connect",
+        data : { 'name': connect},
+        success : function(json) {
+            $("#request-access").hide();
+            console.log("requested access complete");
+        }
+    })
+}
+
+function dicsconnect($this){
+    console.log("button clicked");
+    var connect = $this;
+    alert(connect);
+    console.log("data: " + connect);
+    $.ajax({
+        type: 'GET',
+        url: "dicsconnect",
+        data : { 'name': connect},
+        success : function(json) {
+            $("#request-access").hide();
+            console.log("requested access complete");
+        }
+    })
+}
+</script>
