@@ -1,7 +1,9 @@
-<div class="col-lg-6">
+
   <div class="card">
     <div class="card-header">
       <strong class="card-title">Устройства</strong>
+      <button type="button" id="findDevice" onclick="findDevice()"
+      class="btn btn-outline-info btn-sm" style="right: 5px; top:  7px;position: absolute;"><i class="fa fa-search"></i>&nbsp; Success</button>
     </div>
 
     <div class="card-body">
@@ -26,20 +28,21 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ list.2.0 }}</td>
                     <td>{{ list.0 }}</td>
-                    <td>{{ list.3 }}</td>
+                    <td>
+                      <a href="http://{{ list.3 }}" class="btn btn-link" style="padding: 0px">
+                        <i class="fa fa-link">{{ list.3 }}</i>
+                      </a>
+                    </td>
                     <td>{{ list.2.1 }}</td>
                     {% if list.1 == ""%}
                         <td>
-                          Свободен
-                          <br>
-                          <button type="button" onclick="connect('{{list.0}}')">Подключить</button>
+                          <button type="button" class="btn btn-success btn-sm" onclick="connect('{{list.0}}')"><i class="fa fa-sign-in"></i>&nbsp; Подключить</button>
                             <!-- <input class="btn btn-primary" type="submit" value="Подключить"/> -->
                         </td>
 
                     {%else %}
                         <td>
-                          <p>Занят ({{list.1}})</p>
-                          <button type="button" onclick="dicsconnect('{{list.0}}')">Отключить</button>
+                          <button type="button" class="btn btn-danger btn-sm" onclick="dicsconnect('{{list.0}}')">Отключить &nbsp; <i class="fa fa-sign-out"></i></button>
                         </td>
                     {% endif %}
                   </tr>
@@ -49,21 +52,19 @@
       </table>
     </div>
   </div>
-</div>
 
 
 <script>
 function connect($this){
     console.log("button clicked");
     var connect = $this;
-    alert(connect);
-    console.log("data: " + connect);
     $.ajax({
         type: 'GET',
-        url: "connect",
+        url: "home/connect",
         data : { 'name': connect},
-        success : function(json) {
-            $("#request-access").hide();
+        success : function(result) {
+            $("#tableFindDevice").html(result);
+            // alert(result);
             console.log("requested access complete");
         }
     })
@@ -72,15 +73,23 @@ function connect($this){
 function dicsconnect($this){
     console.log("button clicked");
     var connect = $this;
-    alert(connect);
-    console.log("data: " + connect);
     $.ajax({
         type: 'GET',
-        url: "dicsconnect",
+        url: "home/disconnect",
         data : { 'name': connect},
-        success : function(json) {
-            $("#request-access").hide();
+        success : function(result) {
+            $("#tableFindDevice").html(result);
             console.log("requested access complete");
+        }
+    })
+}
+
+function findDevice(){
+    $.ajax({
+        type: 'GET',
+        url: "home/findDeviceHtml",
+        success : function(result) {
+            $("#tableFindDevice").html(result);
         }
     })
 }
