@@ -1,8 +1,10 @@
 import os
 from ctypes import *
 
-class n9000:
+from multiprocessing.pool import ThreadPool
+import time
 
+class n9000:
     #конструктор
     def __init__(self,rm_session):
         self.name = u'' # устанавливаем имя
@@ -29,6 +31,15 @@ class n9000:
         print(self.viStatus,str(buf,'cp1251'),size)
         return str(buf.value.encode('utf16'),'cp1251')[2:-1]
 
+#Функция запроса на установку данных на устройство
+    def printDevice(self,query):
+        start = time.time()
+        size = c_ulong()
+        buf = create_unicode_buffer(2058)
+        self.viStatus = self.visa64.viWrite(self.session,query,len(query),byref(size))
+        print(self.viStatus,query,size)
+        print ("queryDevice " + str(query) + " time: %s" % (time.time()-start))
+        return size
 
 #Функция на подключение устройства
     def connect(self,name):

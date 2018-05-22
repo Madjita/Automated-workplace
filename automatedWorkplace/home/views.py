@@ -15,7 +15,7 @@ from myclass import N9000 , Micran , N6700, GSG, Osuilograf , HMP2020
 from mysoket import udp
 
 from block import block_gts
-
+from workplace import gts_auto
 
 import time
 
@@ -45,6 +45,7 @@ hmp2020 = HMP2020.hmp2020(visa64,rm_session)
 udp = udp.udp()
 gts = block_gts.gts()
 
+gts_auto = gts_auto.gts_auto(n9000,gts)
 #myDll = WinDLL( BASE_DIR + "/Visa/micranLib.dll")
 
 
@@ -129,14 +130,17 @@ def index(request):
     automatedWorkstation = TableAutomatedWorkstation.objects.all()
     json_object = findDevice()
 
-    gts.connect('10.12.1.100',5548)
+    gts.connect('192.168.1.10',5548)
 
-    freq_prd = (950-950)*100;
-    freq_prm = (2150-950)*100;
-    ampl_i = 4095
-    ampl_q = ampl_i;
+    n9000.connect("TCPIP::10.12.1.89::inst0::INSTR")
+    gts_auto.startWork()
 
-    gts.write(1,0,freq_prd,0,0,freq_prm,0,0,0,ampl_i,ampl_q,0,0,0,0);
+    # freq_prd = (950-950)*100;
+    # freq_prm = (950-950)*100;
+    # ampl_i = 4095
+    # ampl_q = ampl_i;
+    #
+    # gts.write(1,0,freq_prd,0,0,freq_prm,0,0,0,ampl_i,ampl_q,0,0,0,0);
     #udp.startServer('',9090)
 
     #udp.connect('10.12.1.100',8888)
