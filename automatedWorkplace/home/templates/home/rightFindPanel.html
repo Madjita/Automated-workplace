@@ -36,13 +36,13 @@
                     <td>{{ list.2.1 }}</td>
                     {% if list.1 == ""%}
                         <td>
-                          <button type="button" class="btn btn-success btn-sm" onclick="connect('{{list.0}}')"><i class="fa fa-sign-in"></i>&nbsp; Подключить</button>
+                          <button type="button" class="btn btn-success btn-sm" onclick="connect('{{list.0}}','{{list.2.0}}')"><i class="fa fa-sign-in"></i>&nbsp; Подключить</button>
                             <!-- <input class="btn btn-primary" type="submit" value="Подключить"/> -->
                         </td>
 
                     {%else %}
                         <td>
-                          <button type="button" class="btn btn-danger btn-sm" onclick="dicsconnect('{{list.0}}')">Отключить &nbsp; <i class="fa fa-sign-out"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm" onclick="dicsconnect('{{list.0}}','{{list.2.0}}')">Отключить &nbsp; <i class="fa fa-sign-out"></i></button>
                         </td>
                     {% endif %}
                   </tr>
@@ -55,13 +55,12 @@
 
 
 <script>
-function connect($this){
+function connect($name,$type){
     console.log("button clicked");
-    var connect = $this;
     $.ajax({
         type: 'GET',
         url: "home/connect",
-        data : { 'name': connect},
+        data : { 'name': $name , 'type' : $type },
         success : function(result) {
             $("#tableFindDevice").html(result);
             // alert(result);
@@ -70,13 +69,12 @@ function connect($this){
     })
 }
 
-function dicsconnect($this){
+function dicsconnect($name,$type){
     console.log("button clicked");
-    var connect = $this;
     $.ajax({
         type: 'GET',
         url: "home/disconnect",
-        data : { 'name': connect},
+        data : { 'name': $name , 'type' : $type },
         success : function(result) {
             $("#tableFindDevice").html(result);
             console.log("requested access complete");

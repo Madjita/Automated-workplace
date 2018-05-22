@@ -1,21 +1,31 @@
-import os
 from ctypes import *
+
+from multiprocessing.pool import ThreadPool
+import time
 
 class n6700:
 
     #конструктор
-    def __init__(self):
+    def __init__(self,lib,rm_session):
         self.name = u'' # устанавливаем имя
         self.session = c_uint32()
-        self.rm_session = c_uint32()
-        self.BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.visa64 = WinDLL(self.BASE_DIR + "/Visa/MiVISA32.dll")
+        self.rm_session = rm_session
+        self.visa64 = lib
         self.viStatus = c_uint32()
 
+#Асинхронная функция добавляет выполнение функции в новый поток
+    def async_func(self, name, list):
+        pool = ThreadPool(4)
+        async_result = pool.apply_async(name,list)
+        #pool.close()
+        #pool.join()
+        result = async_result.get()
+        return  result
 
-    #функция
-    def display_info(self):
-        print("Примет, меня зовту", self.name)
+
+    def viOpen(self,name):
+        viStatus = self.visa64.viOpen(self.rm_session,name.encode('utf8'),1,5000,byref(self.session))
+
 
 #Функция запроса на получение данных от устройства
     def queryDevice(self,query):
@@ -64,18 +74,29 @@ class n6700:
         print(vector)
         return vector
 
+# Функция подачи питания
+    def printDevice(self,query):
+        size = c_uint32()
+        self.viStatus = self.visa64.viWrite(self.session,query,len(query),byref(size))
+        print(self.viStatus,query,size)
+
 
 #Функция на подключение устройства
     def connect(self,name):
         ViStatus = self.visa64.viOpenDefaultRM(byref(self.rm_session))
         self.name = name;
-        viStatus = self.visa64.viOpen(self.rm_session,name.encode('utf-8'),None,None,byref(self.session))
+    
+        self.async_func(self.viOpen,[name])
+
+        #viStatus = self.visa64.viOpen(self.rm_session,name.encode('utf-8'),None,None,byref(self.session))
 
         query=b'*IDN?\r\n'
         buf = self.queryDevice(query);
         print("buf = " + buf)
 
-        #self.getSetVolt("ALL")
+        self.printDevice(b'OUTPut:STATe 1,(@4)\r\n');
+
+        self.getSetVolt("ALL")
 
         return buf
 

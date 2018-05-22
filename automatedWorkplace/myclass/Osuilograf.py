@@ -1,9 +1,9 @@
 import os
 from ctypes import *
 
-class n9000:
+class Osuilograf:
 
-    #конструктор
+#конструктор
     def __init__(self,rm_session):
         self.name = u'' # устанавливаем имя
         self.session = c_uint32()
@@ -13,7 +13,7 @@ class n9000:
         self.viStatus = c_uint32()
 
 
-    #функция
+#функция
     def display_info(self):
         print("Примет, меня зовту", self.name)
 
@@ -34,6 +34,10 @@ class n9000:
     def connect(self,name):
         ViStatus = self.visa64.viOpenDefaultRM(byref(self.rm_session))
         self.name = name;
+        n = name.split('::')
+        print(n[-1])
+        if n[-1] == 'SOCKET':
+             name += '::GEN'
         viStatus = self.visa64.viOpen(self.rm_session,name.encode('utf-8'),None,None,byref(self.session))
 
         query=b'*IDN?\r\n'

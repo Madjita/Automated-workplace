@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import TableAutomatedWorkstation, TableDevice, TableDeviceSerial
+from .models import TableAutomatedWorkstation, TableDevice
 
 admin.site.register(TableAutomatedWorkstation)
 admin.site.register(TableDevice)
-admin.site.register(TableDeviceSerial)
 # Register your models here.
