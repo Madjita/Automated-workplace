@@ -8,7 +8,7 @@ from django.http import HttpResponse, JsonResponse
 
 import sys, os , json , codecs
 from ctypes import *
-from socket import *
+import socket
 
 #Добавление моего класса
 from myclass import N9000 , Micran , N6700, GSG, Osuilograf , HMP2020
@@ -83,6 +83,14 @@ def findDevice():
         findStr[0] = findStr[0][2:-1]
         findStr[2] = findStr[2].split(' ')
         findStr[3] = findStr[0][2:-1].split('::')[1]
+        if findStr[3].split('.')[1] == 'rs':
+            findStr[3] = socket.gethostbyname('A-'+findStr[2][0]+'-'+findStr[2][1][5:]+'.local');
+            findStr[0] = "TCPIP::"+findStr[3]+"::inst0::INSTR"
+
+
+    #host = socket.gethostbyname('A-'+json_object[0][]+'-20895.local');
+    #print (host)
+
     list.append(findStr)
 
     dontFind = None
@@ -102,6 +110,10 @@ def findDevice():
             findStr[0] = findStr[0][2:-1]
             findStr[2] = findStr[2].split(' ')
             findStr[3] = findStr[0][2:-1].split('::')[1]
+            if findStr[3].split('.')[1] == 'rs':
+                findStr[3] = socket.gethostbyname('A-'+findStr[2][0]+'-'+findStr[2][1][5:]+'.local');
+                findStr[0] = "TCPIP::"+findStr[3]+"::inst0::INSTR"
+
             list.append(findStr)
 
     visa64.viClose(instr_list)
@@ -129,11 +141,6 @@ def queryDevice(query):
 def index(request):
     automatedWorkstation = TableAutomatedWorkstation.objects.all()
     json_object = findDevice()
-
-    gts.connect('192.168.1.10',5548)
-
-    n9000.connect("TCPIP::10.12.1.89::inst0::INSTR")
-    gts_auto.startWork()
 
     # freq_prd = (950-950)*100;
     # freq_prm = (950-950)*100;
@@ -223,6 +230,10 @@ def connect(request):
             micran.connect(name)
         elif type == 'N6700B':
             n6700.connect(name)
+        elif type == 'N9030A':
+                gts.connect('192.168.1.10',5548)
+                n9000.connect(name)
+                gts_auto.startWork()
 
         #hmp2020.connect('TCPIP::10.12.1.9::5025::SOCKET')
 
