@@ -1,0 +1,179 @@
+<div class="diplomRightPanel">
+  <div class="card">
+      <div >
+        <strong>Приборы</strong>
+        <button type="button" id="findDevice" onclick="findDevice()" class="btn btn-outline-info btn-sm" style="float: right;"><i class="fa fa-search"></i></button>
+      </div>
+      <div  style="font-size: 14px">
+          <table class="diplomTable">
+              <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">№</th>
+                      <th scope="col">Устройство</th>
+                      <th scope="col">Ip адрес</th>
+                      <th scope="col">Серия</th>
+                      <th scope="col">Статус</th>
+                    </tr>
+              </thead>
+
+              <tbody>
+                    <tr>
+                        <th scope="row">1</td>
+                        <td>N6700B</td>
+                        <td>
+                          <a href="http://10.12.1.70" class="btn btn-link" style="padding: 0px">
+                            <i class="fa fa-link">10.12.1.70</i>
+                          </a>
+                        </td>
+                        <td>MY54009013</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">2</td>
+                        <td>N6700B</td>
+                        <td>
+                          <a href="http://10.12.1.71" class="btn btn-link" style="padding: 0px">
+                            <i class="fa fa-link">10.12.1.71</i>
+                          </a>
+                        </td>
+                        <td>MY54009114</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">3</td>
+                        <td>MSO-X</td>
+                        <td>
+                          <a href="http://10.12.1.62" class="btn btn-link" style="padding: 0px">
+                            <i class="fa fa-link">10.12.1.62</i>
+                          </a>
+                        </td>
+                        <td>3022T</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">4</td>
+                        <td>GSG-64E</td>
+                        <td>
+                          <a href="http://10.12.1.73" class="btn btn-link" style="padding: 0px">
+                            <i class="fa fa-link">10.12.1.73</i>
+                          </a>
+                        </td>
+                        <td>201312</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">5</td>
+                        <td>PG-2J</td>
+                        <td>
+                          <a href="http://10.12.1.74" class="btn btn-link" style="padding: 0px">
+                            <i class="fa fa-link">10.12.1.74</i>
+                          </a>
+                        </td>
+                        <td>15012285</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                    </tr>
+
+             </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+        <div >
+          <strong>Подключение плат</strong>
+          <button type="button" id="findDevice" onclick="findDevice()" class="btn btn-outline-info btn-sm" style="float: right;"><i class="fa fa-search"></i></button>
+        </div>
+        <div  style="font-size: 14px">
+            <table class="diplomTable">
+                <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Порт</th>
+                        <th scope="col">Статус</th>
+                      </tr>
+                </thead>
+
+                <tbody>
+                      <tr>
+                          <th scope="row">1</td>
+                          <td>COM1</td>
+                          <td>
+                            <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                          </td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">2</td>
+                        <td>COM2</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">3</td>
+                        <td>COM3</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                          <th scope="row">4</td>
+                          <td>COM4</td>
+                          <td>
+                            <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                          </td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">5</td>
+                        <td>COM5</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">6</td>
+                        <td>COM6</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">7</td>
+                        <td>COM7</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">8</td>
+                        <td>COM8</td>
+                        <td>
+                          <button type="button" style="float: right"   class="btn btn-outline-success btn-sm" onclick="connect('TCPIP1::10.12.0.70::inst0::INSTR','N6700B')"><i class="fa fa-sign-in"></i></button>
+                        </td>
+                      </tr>
+
+               </tbody>
+          </table>
+        </div>
+      </div>
+</div>

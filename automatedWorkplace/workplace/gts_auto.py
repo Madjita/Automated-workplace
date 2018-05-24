@@ -102,6 +102,7 @@ class gts_auto:
 
     def work(self):
         self.listRezulr = []
+        self.n9000.printDevice(b'SYST:PRESet\n')
         p1 = self.proverka_1()
         print(p1)
         self.listRezulr.apend(p1)

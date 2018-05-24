@@ -1515,7 +1515,7 @@ header .form-inline {
   white-space: nowrap;
   vertical-align: middle;
   transition: all .15s ease-in-out;
-  border-radius: 0;
+  /* border-radius: 0; */
   cursor: pointer; }
 
 /* Icons */

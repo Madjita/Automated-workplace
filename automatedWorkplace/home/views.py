@@ -62,6 +62,16 @@ gts_auto = gts_auto.gts_auto(n9000,gts)
 # def async_close():
 #     return 0
 
+#Диплом
+def diplom(request):
+    automatedWorkstation = TableAutomatedWorkstation.objects.all()
+    #json_object = findDevice()
+
+    return render(request, 'home/diplom.html', {'automatedWorkstation': automatedWorkstation})
+
+
+#####
+
 def findDevice():
     start = time.time()
     expr = b'TCPIP?*'
