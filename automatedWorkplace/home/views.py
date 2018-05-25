@@ -66,8 +66,15 @@ gts_auto = gts_auto.gts_auto(n9000,gts)
 def diplom(request):
     automatedWorkstation = TableAutomatedWorkstation.objects.all()
     #json_object = findDevice()
-
-    return render(request, 'home/diplom.html', {'automatedWorkstation': automatedWorkstation})
+    listNp = []
+    for countDevices in range(24):
+         listNpData = []
+         listNpData.append(countDevices.numerator+1)
+         listNpData.append('Г20')
+         listNpData.append('7')
+         listNpData.append('5678')
+         listNp.append(listNpData)
+    return render(request, 'home/diplom.html', {'automatedWorkstation': automatedWorkstation, 'listNp': listNp})
 
 
 #####

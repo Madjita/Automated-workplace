@@ -1,14 +1,92 @@
 <div class="diplomBody">
 
-  <div class="col-lg-2" style="background-color:  red; height: 45%;" >
-    <div class="card"style="height: 100%;">
+  <div class="col-lg-2" style="background-color:  brown; height: 45%;" >
+    <div class="card" style="height: 100%;">
+      <div style="border-bottom: 1px solid #dee2e6; color: white; background-color: black">
+        <strong>НП №1</strong>
+      </div>
+      <div>
+        <div class="diplomTable">
+          <table style="width: 100%; font-size: 12px;">
+            <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">I</th>
+                    <th scope="col">V</th>
+                    <th scope="col">P</th>
+                    <th scope="col">Сген</th>
+                    <th scope="col">П</th>
+                  </tr>
+            </thead>
+            <tbody>
+                  <tr>
+                      <td>10 A</td>
+                      <td>20 V</td>
+                      <td>20 Вт</td>
+                      <td>GPS:</td>
+                      <td>10</td>
+                  </tr>
+                  <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>GLONASS:</td>
+                      <td>10</td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+
+
+        <div style="width: -webkit-fill-available;height: -webkit-fill-available; background-color: yellow">
+
+          <div class="diplomTable" >
+            <table style="font-size: 9px; float: left">
+              <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">№</th>
+                      <th scope="col">Спутник</th>
+                      <th scope="col">Pежим</th>
+                      <th scope="col">Уровень</th>
+                    </tr>
+              </thead>
+              <tbody>
+
+                      {% for list in listNp %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ list.1 }}</td>
+                        <td>{{ list.2 }}</td>
+                        <td>{{ list.3 }}</td>
+                    </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+          </div>
+
+          <div style="float: left; width: 100px;">
+            <div class="barGraph">
+              <ul class="graph" style="font-size: 10px">
+                  {% for list in listNp %}
+                <span class="graph-barBack">
+                  <li class="graph-bar" data-value="28.5">
+                    <span class="graph-legend">{{list.2}}</span>
+                  </li>
+                </span>
+                  {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
   </div>
   <div class="col-lg-2" style="background-color:  #fff; height: 45%">
     <div class="card"style="height: 100%;">
     </div>
   </div>
-  <div class="col-lg-2" style="background-color:  red; height: 45%" >
+  <div class="col-lg-2" style="background-color:  brown; height: 45%" >
     <div class="card"style="height: 100%;">
     </div>
   </div>
@@ -19,7 +97,7 @@
 
 
 
-  <div class="col-lg-2" style="background-color:  red; height: 45%;" >
+  <div class="col-lg-2" style="background-color:  brown; height: 45%;" >
     <div class="card"style="height: 100%;">
     </div>
   </div>
@@ -27,7 +105,7 @@
     <div class="card"style="height: 100%;">
     </div>
   </div>
-  <div class="col-lg-2" style="background-color:  red; height: 45%" >
+  <div class="col-lg-2" style="background-color:  brown; height: 45%" >
     <div class="card"style="height: 100%;">
     </div>
   </div>
@@ -36,3 +114,37 @@
     </div>
   </div>
 </div>
+
+<script>
+// Produces width of .barChart
+$(document).ready(function() {
+  $('.graph-bar').each(function() {
+     var dataWidth = $(this).data('value');
+     $(this).css("width", dataWidth + "%");
+  });
+});
+
+// Positioning of .bubbleChart
+$(document).ready(function() {
+  $('.chart-bubble').each(function() {
+    // Bubble Size
+    var bubbleSize = $(this).data('value');
+    $(this).css("width", function() {
+      return (bubbleSize * 10) + "px"
+    });
+    $(this).css("height", function() {
+      return (bubbleSize * 10) + "px"
+    });
+
+    // Bubble Position
+    var posX = $(this).data('x');
+    var posY = $(this).data('y');
+    $(this).css("left", function() {
+      return posX - (bubbleSize * 0.5) + "%"
+    });
+    $(this).css("bottom", function() {
+      return posY - (bubbleSize * 0.5) + "%"
+    });
+  });
+});
+</script>

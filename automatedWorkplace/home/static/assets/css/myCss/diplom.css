@@ -2,7 +2,7 @@
     box-sizing: border-box;
 } */
 
-.diplomHeader{
+.diplomHeader {
   background: #fff;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
   clear: both;
@@ -10,14 +10,14 @@
   /* padding: 15px 20px 13px 20px; */
   width: 100%;
 }
-.diplomBody{
+.diplomBody {
   background-color: green;
   width: 100%;
   height: 100vh;
   float: center;
 }
 
-.np{
+.np {
   background-color: gray;
   -webkit-box-flex: 0;
   -ms-flex: 0 0 50%;
@@ -37,8 +37,8 @@
   float: right;
   position:  relative;
 }
-.diplomRightPanel{
-  background-color: red;
+.diplomRightPanel {
+   background-color: red;
   width: 400px;
   height: 100vh;
   float: left;
@@ -61,9 +61,7 @@
     border-color: #32383e;
 }
 
-.diplomTable th{
-  padding: .75rem;
-
+.diplomTable th {
   border-top: 1px solid #dee2e6;
 }
 
@@ -149,4 +147,238 @@ body {
   width: 0;
   height: 0;
   opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+/* Mixings &  Variables */
+.clearfix,
+.clearfix:before,
+.clearfix:after {
+  display: block;
+  content: " ";
+  clear: both;
+  zoom: 1;
+}
+/* Resets */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background: #EDF2F6;
+  font-family: Arial;
+  color: #444;
+}
+.wrap {
+  margin: 0 auto;
+  padding: 50px;
+  max-width: 1200px;
+}
+/* Bar Graph Class */
+.barGraph {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 50px;
+}
+.graph {
+  position: relative;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: calc(96%);
+  left: 4%;
+}
+.graph-barBack {
+  border-radius: 2px;
+  background: #DAE4EB;
+  margin-bottom: 10px;
+  display: block;
+}
+.graph-bar {
+  background-color: #59BAC0;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 9999;
+  display: block;
+  height: 20px;
+  width: 0%;
+}
+.graph-bar:hover {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background: #428D92;
+}
+.graph-bar:last-child {
+  margin-bottom: 0;
+}
+.graph-bar:after {
+  position: absolute;
+  content: attr(data-value);
+  display: none;
+  font-size: 12px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  line-height: 20px;
+  height: 20px;
+  padding: 0 10px;
+  margin-left: 5px;
+  left: 100%;
+  top: 0;
+}
+.graph-bar:hover:after {
+  display: block;
+}
+.graph-legend {
+  position: absolute;
+  /* margin-right: 10px; */
+  z-index: 9999;
+}
+/* Bubble Chart */
+.chart {
+  border-radius: 3px;
+  border: 2px solid rgba(113, 125, 149, 0.45);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 300px;
+}
+.chart-bubble {
+  overflow: hidden;
+  background-color: #59BAC0;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  position: absolute;
+  border-radius: 100%;
+  cursor: pointer;
+  display: block;
+  min-height: 10px;
+  min-width: 10px;
+  z-index: 999;
+  bottom: 0;
+  left: 0;
+}
+.chart-bubble:hover {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background: #428D92;
+}
+.chart-bubble:after {
+  position: absolute;
+  content: attr(data-label);
+  display: none;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 50%;
+  line-height: 1px;
+  font-size: 15px;
+  color: #fff;
+}
+.chart-bubble:hover:after {
+  display: block;
+}
+/* Lines for Charts */
+.lines {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  left: 0;
+  top: 0;
+}
+.lines-horz {
+  border-bottom: 1px dashed rgba(113, 125, 149, 0.4);
+  position: absolute;
+  width: 100%;
+  height: 0px;
+}
+.lines-horz:nth-of-type(1) {
+  top: 20%;
+}
+.lines-horz:nth-of-type(2) {
+  top: 40%;
+}
+.lines-horz:nth-of-type(3) {
+  top: 60%;
+}
+.lines-horz:nth-of-type(4) {
+  top: 80%;
+}
+.lines-vert {
+  border-right: 1px dashed rgba(113, 125, 149, 0.4);
+  position: absolute;
+  height: 100%;
+  width: 1px;
+}
+.lines-vert:nth-of-type(5) {
+  left: 20%;
+}
+.lines-vert:nth-of-type(6) {
+  left: 40%;
+}
+.lines-vert:nth-of-type(7) {
+  left: 60%;
+}
+.lines-vert:nth-of-type(8) {
+  left: 80%;
+}
+/* Line Graph */
+.lineChart {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  border-radius: 3px;
+  border: 2px solid rgba(113, 125, 149, 0.45);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 300px;
+}
+.lineChart svg {
+  position: absolute;
+  z-index: 999;
+}
+.lineChart circle {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  position: relative;
+  cursor: pointer;
+  stroke: #59BAC0;
+  stroke-width: 3;
+  fill: #59BAC0;
+}
+.lineChart circle:hover {
+  stroke-width: 8;
+}
+.lineChart line {
+  stroke: #717D95;
+  stroke-width: 4;
+}
+.trend line {
+  stroke: rgba(204, 51, 51, 0.8);
 }
